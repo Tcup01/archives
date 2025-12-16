@@ -3,8 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <title>tcup's archive</title>
+
   <style>
     html { scroll-behavior: smooth; }
+
     body { 
       background-color: #000; 
       color: #0099ff; 
@@ -12,16 +14,42 @@
       margin: 0; 
       font-size: 20px; 
       text-shadow: 0 0 6px rgba(0,153,255,0.6); 
-      position: relative; 
       overflow-x: hidden; 
     }
-    a { color: #0066cc; text-decoration: none; transition: 0.3s; }
-    a:hover { text-shadow: 0 0 10px #0099ff; color: #66ccff; }
 
-    header { text-align: center; padding: 30px 10px; border-bottom: 2px solid #c0c0c0; }
-    header h1 { margin: 0; font-size: 48px; letter-spacing: 2px; text-shadow: 0 0 8px #0099ff; }
-    .cursor::after { content: "_"; animation: blinkPulse 1s steps(2, start) infinite; }
-    @keyframes blinkPulse { 0%,50%,100%{opacity:1;} 25%,75%{opacity:0.3;} }
+    a { 
+      color: #0066cc; 
+      text-decoration: none; 
+      transition: 0.3s; 
+    }
+
+    a:hover { 
+      text-shadow: 0 0 10px #0099ff; 
+      color: #66ccff; 
+    }
+
+    header { 
+      text-align: center; 
+      padding: 30px 10px; 
+      border-bottom: 2px solid #c0c0c0; 
+    }
+
+    header h1 { 
+      margin: 0; 
+      font-size: 48px; 
+      letter-spacing: 2px; 
+      text-shadow: 0 0 8px #0099ff; 
+    }
+
+    .cursor::after { 
+      content: "_"; 
+      animation: blinkPulse 1s steps(2, start) infinite; 
+    }
+
+    @keyframes blinkPulse { 
+      0%,50%,100% { opacity: 1; } 
+      25%,75% { opacity: 0.3; } 
+    }
 
     .profile-pic { 
       width: 100px; 
@@ -31,69 +59,151 @@
       box-shadow: 0 0 12px #c0c0c0; 
       object-fit: cover; 
       display: block; 
-      margin: 0 auto 15px auto; 
+      margin: 0 auto 15px; 
     }
 
-    nav { text-align: center; padding: 10px; background: #050505; border-bottom: 2px solid #c0c0c0; }
+    nav { 
+      text-align: center; 
+      padding: 10px; 
+      background: #050505; 
+      border-bottom: 2px solid #c0c0c0; 
+    }
+
     nav a { margin: 0 12px; }
 
-    .container { max-width: 900px; margin: auto; padding: 20px; background-color: #000; }
-
-    .window { border: 2px solid #c0c0c0; padding: 15px; margin-bottom: 25px; background: #030303; transition: 0.3s; }
-    .window:hover { box-shadow: 0 0 15px #c0c0c0; border-color: #ffffff; }
-    .window h2 { margin-top:0; border-bottom:1px dashed #c0c0c0; padding-bottom:5px; text-shadow:0 0 6px #0099ff; }
-    p, li { text-shadow:0 0 3px #0099ff; }
-    .status { color:#66ccff; }
-
-    /* Backlog with covers */
-    .game-cover {
-      width: 40px;
-      height: 40px;
-      object-fit: cover;
-      border-radius: 4px;
-      margin-right: 8px;
-      vertical-align: middle;
-      box-shadow: 0 0 4px #c0c0c0;
+    .container { 
+      max-width: 900px; 
+      margin: auto; 
+      padding: 20px; 
     }
-    ul { list-style-type:none; padding-left:0; display:flex; flex-wrap: wrap; max-height: 500px; overflow: hidden; transition: max-height 0.5s ease; }
-    ul.timeline li { display:flex; align-items:center; width: 45%; margin: 5px 2.5%; padding-left:0; }
+
+    .window { 
+      border: 2px solid #c0c0c0; 
+      padding: 15px; 
+      margin-bottom: 25px; 
+      background: #030303; 
+      transition: 0.3s; 
+    }
+
+    .window:hover { 
+      box-shadow: 0 0 15px #c0c0c0; 
+      border-color: #ffffff; 
+    }
+
+    .window h2 { 
+      margin-top: 0; 
+      border-bottom: 1px dashed #c0c0c0; 
+      padding-bottom: 5px; 
+    }
+
+    .status { color: #66ccff; }
+
+    /* Backlog */
+    ul.timeline { 
+      list-style: none; 
+      padding: 0; 
+      display: flex; 
+      flex-wrap: wrap; 
+      max-height: 500px; 
+      overflow: hidden; 
+      transition: max-height 0.5s ease; 
+    }
+
     ul.timeline.expanded { max-height: 5000px; }
-    ul.timeline li::before { content:none; }
 
-    .view-more-btn { display:block; margin: 10px auto; padding: 8px 16px; background: linear-gradient(to right, #c0c0c0, #ffffff); color: #000; font-weight:bold; border:1px solid #999; border-radius:4px; cursor:pointer; transition:0.3s; }
-    .view-more-btn:hover { background: linear-gradient(to right, #ffffff, #c0c0c0); }
+    ul.timeline li { 
+      width: 45%; 
+      margin: 6px 2.5%; 
+      display: flex; 
+      align-items: center; 
+    }
 
-    /* Vertical timeline styles */
-    .timeline-vertical { position:relative; margin-left:30px; padding-left:20px; }
-    .timeline-vertical::before { content:''; position:absolute; left:0; top:0; width:2px; height:100%; background: linear-gradient(to bottom,#0099ff 0%,#66ccff 50%,#0099ff 100%); box-shadow:0 0 8px #0099ff; }
-    .timeline-item { position:relative; margin-bottom:35px; }
-    .timeline-dot { position:absolute; left:-12px; top:0; width:18px; height:18px; border-radius:50%; background: linear-gradient(145deg, #c0c0c0, #ffffff); box-shadow:0 0 10px #c0c0c0; animation:glowPulse 2s infinite alternate; }
-    @keyframes glowPulse {0%{box-shadow:0 0 8px #c0c0c0;} 100%{box-shadow:0 0 16px #ffffff;}}
-    .timeline-content { padding-left:25px; }
-    .timeline-content strong { display:block; font-size:18px; margin-bottom:2px; text-shadow:0 0 6px #0099ff; }
-    .timeline-content p { margin:0; font-size:16px; color:#66ccff; }
+    .game-cover { 
+      width: 40px; 
+      height: 40px; 
+      object-fit: cover; 
+      margin-right: 8px; 
+      border-radius: 4px; 
+      box-shadow: 0 0 4px #c0c0c0; 
+    }
 
-    footer { background-color:#000; text-align:center; padding:20px; font-size:16px; color:#66ccff; border-top:4px solid #c0c0c0; box-shadow:0 0 20px #c0c0c0; }
+    .view-more-btn { 
+      display: block; 
+      margin: 10px auto; 
+      padding: 8px 16px; 
+      background: linear-gradient(to right, #c0c0c0, #ffffff); 
+      color: #000; 
+      font-weight: bold; 
+      border: 1px solid #999; 
+      border-radius: 4px; 
+      cursor: pointer; 
+    }
+
+    /* Vertical timeline */
+    .timeline-vertical { 
+      position: relative; 
+      margin-left: 30px; 
+      padding-left: 20px; 
+    }
+
+    .timeline-vertical::before { 
+      content: ""; 
+      position: absolute; 
+      left: 0; 
+      top: 0; 
+      width: 2px; 
+      height: 100%; 
+      background: linear-gradient(#0099ff, #66ccff, #0099ff); 
+    }
+
+    .timeline-item { 
+      position: relative; 
+      margin-bottom: 35px; 
+    }
+
+    .timeline-dot { 
+      position: absolute; 
+      left: -11px; 
+      top: 0; 
+      width: 18px; 
+      height: 18px; 
+      border-radius: 50%; 
+      background: #c0c0c0; 
+      box-shadow: 0 0 10px #c0c0c0; 
+    }
+
+    footer { 
+      text-align: center; 
+      padding: 20px; 
+      border-top: 4px solid #c0c0c0; 
+      color: #66ccff; 
+    }
 
     /* Loading screen */
-    #loading-screen { position:fixed; top:0; left:0; width:100%; height:100%; background-color:#000; color:#0099ff; display:flex; justify-content:center; align-items:center; font-family:"Courier New", Courier, monospace; font-size:36px; z-index:10000; text-shadow:0 0 8px #0099ff; }
-    #loading-screen::after { content:"_"; animation: blink 1s steps(2,start) infinite; }
-    @keyframes blink {50%{opacity:0;}}
-    #loading-screen::before { content:""; position:absolute; width:100%; height:100%; background-image:repeating-linear-gradient(0deg, rgba(255,255,255,0.05), rgba(255,255,255,0.05) 2px, transparent 2px, transparent 4px); top:0; left:0; animation: scanlineMove 5s linear infinite; }
-    @keyframes scanlineMove {0%{background-position:0 0;} 100%{background-position:0 20px;}}
+    #loading-screen { 
+      position: fixed; 
+      inset: 0; 
+      background: #000; 
+      display: flex; 
+      align-items: center; 
+      justify-content: center; 
+      font-size: 36px; 
+      z-index: 9999; 
+    }
   </style>
 </head>
+
 <body>
 
-<div id="loading-screen"></div>
+<div id="loading-screen">loading_</div>
 
 <header>
-  <img src="pfp.png" alt="tcup" class="profile-pic">
+  <img src="./pfp.png" alt="tcup" class="profile-pic">
   <h1 class="cursor">tcup's archive</h1>
 </header>
 
 <nav>
-  <a href="#about">about me</a>
+  <a href="#about">about</a>
   <a href="#backlog">backlog</a>
   <a href="#nextup">next up</a>
   <a href="#photos">photos</a>
@@ -105,145 +215,42 @@
   <div class="window" id="about">
     <h2>about me</h2>
     <p>i play video games sometimes lol.</p>
-    <p>this site is my personalized spot to track games i'm playing, share thoughts, and archive random photos.</p>
   </div>
 
-  <!-- Backlog with covers -->
   <div class="window" id="backlog">
     <h2>video game backlog</h2>
-    <p>a few games listed are replays, more info and sorting options will be added soon.</p>
+
     <ul class="timeline" id="backlog-list">
-      <li><img src="images/fallout4.png" alt="Fallout 4" class="game-cover">Fallout 4</li>
-      <li><img src="images/fnv.png" alt="Fallout: New Vegas" class="game-cover">Fallout: New Vegas</li>
-      <li><img src="images/ratchetclank.png" alt="Ratchet and Clank" class="game-cover">Ratchet and Clank</li>
-      <li><img src="images/spiderman.png" alt="Spider-Man" class="game-cover">Spider-Man</li>
-      <li><img src="images/nfsu2.png" alt="Need for Speed Underground 2" class="game-cover">Need for Speed Underground 2</li>
-      <li><img src="images/acecombat5.png" alt="Ace Combat 5" class="game-cover">Ace Combat 5</li>
-      <li><img src="images/slycooper.png" alt="Sly Cooper" class="game-cover">Sly Cooper</li>
-      <li><img src="images/kingdomhearts.png" alt="Kingdom Hearts" class="game-cover">Kingdom Hearts</li>
-      <li><img src="images/wwzero.png" alt="World War Zero" class="game-cover">World War Zero</li>
-      <li><img src="images/dbzbt2.png" alt="DBZ BT2" class="game-cover">DBZ BT2</li>
-      <li><img src="images/dbzbt3.png" alt="DBZ BT3" class="game-cover">DBZ BT3</li>
-      <li><img src="images/rdr.png" alt="Red Dead Redemption" class="game-cover">Red Dead Redemption</li>
-      <li><img src="images/legobatman.png" alt="LEGO Batman" class="game-cover">LEGO Batman</li>
-      <li><img src="images/ac2.png" alt="Assassin's Creed II" class="game-cover">Assassin's Creed II</li>
-      <li><img src="images/bioshock.png" alt="Bioshock" class="game-cover">Bioshock</li>
-      <li><img src="images/legomarvel.png" alt="LEGO Marvel Superheroes" class="game-cover">LEGO Marvel Superheroes</li>
-      <li><img src="images/forzahorizon.png" alt="Forza Horizon" class="game-cover">Forza Horizon</li>
-      <li><img src="images/smb2.png" alt="Super Mario Bros 2" class="game-cover">Super Mario Bros 2</li>
-      <li><img src="images/smb3.png" alt="Super Mario Bros 3" class="game-cover">Super Mario Bros 3</li>
-      <li><img src="images/chronotrigger.png" alt="Chrono Trigger" class="game-cover">Chrono Trigger</li>
-      <li><img src="images/smw.png" alt="Super Mario World" class="game-cover">Super Mario World</li>
-      <li><img src="images/pkmcolosseum.png" alt="Pokemon Colosseum" class="game-cover">Pokemon Colosseum</li>
-      <li><img src="images/mario64.png" alt="Super Mario 64" class="game-cover">Super Mario 64</li>
-      <li><img src="images/pkmstadium.png" alt="Pokemon Stadium" class="game-cover">Pokemon Stadium</li>
-      <li><img src="images/waverace64.png" alt="Wave Race 64" class="game-cover">Wave Race 64</li>
-      <li><img src="images/silenthill.png" alt="Silent Hill" class="game-cover">Silent Hill</li>
-      <li><img src="images/crash.png" alt="Crash Bandicoot" class="game-cover">Crash Bandicoot</li>
-      <li><img src="images/megamanlegends.png" alt="Mega Man Legends" class="game-cover">Mega Man Legends</li>
-      <li><img src="images/smbu.png" alt="Super Mario Bros U" class="game-cover">Super Mario Bros U</li>
-      <li><img src="images/splatoon.png" alt="Splatoon" class="game-cover">Splatoon</li>
-      <li><img src="images/ssbb.png" alt="Super Smash Bros Brawl" class="game-cover">Super Smash Bros Brawl</li>
-      <li><img src="images/smbwii.png" alt="Super Mario Bros Wii" class="game-cover">Super Mario Bros Wii</li>
-      <li><img src="images/smbgalaxy.png" alt="Super Mario Galaxy" class="game-cover">Super Mario Galaxy</li>
-      <li><img src="images/epicmickey.png" alt="Epic Mickey" class="game-cover">Epic Mickey</li>
-      <li><img src="images/nsmb.png" alt="New Super Mario Bros" class="game-cover">New Super Mario Bros</li>
-      <li><img src="images/pkmwhite.png" alt="Pokemon White" class="game-cover">Pokemon White</li>
-      <li><img src="images/pkmsoulsilver.png" alt="Pokemon Soul Silver" class="game-cover">Pokemon Soul Silver</li>
-      <li><img src="images/nsmb2.png" alt="New Super Mario Bros 2" class="game-cover">New Super Mario Bros 2</li>
-      <li><img src="images/smb3dland.png" alt="Super Mario 3D Land" class="game-cover">Super Mario 3D Land</li>
-      <li><img src="images/pkmu.png" alt="Pokemon Ultra Moon" class="game-cover">Pokemon Ultra Moon</li>
-      <li><img src="images/pkmo.png" alt="Pokemon Omega Ruby" class="game-cover">Pokemon Omega Ruby</li>
-      <li><img src="images/pkmsword.png" alt="Pokemon Sword" class="game-cover">Pokemon Sword</li>
-      <li><img src="images/splatoon2.png" alt="Splatoon 2" class="game-cover">Splatoon 2</li>
-      <li><img src="images/helloneighbor.png" alt="Hello Neighbor" class="game-cover">Hello Neighbor</li>
-      <li><img src="images/mariowonder.png" alt="Super Mario Bros Wonder" class="game-cover">Super Mario Bros Wonder</li>
-      <li><img src="images/smbrpg.png" alt="Super Mario RPG" class="game-cover">Super Mario RPG</li>
-      <li><img src="images/ssbu.png" alt="Super Smash Bros Ultimate" class="game-cover">Super Smash Bros Ultimate</li>
+      <li><img class="game-cover" src="./images/fallout4.png">Fallout 4</li>
+      <li><img class="game-cover" src="./images/fnv.png">Fallout: New Vegas</li>
+      <li><img class="game-cover" src="./images/acecombat5.png">Ace Combat 5</li>
+      <li><img class="game-cover" src="./images/rdr.png">Red Dead Redemption</li>
+      <li><img class="game-cover" src="./images/silenthill.png">Silent Hill</li>
+      <li><img class="game-cover" src="./images/smbgalaxy.png">Super Mario Galaxy</li>
     </ul>
+
     <button class="view-more-btn" id="view-more-btn">View More</button>
-  </div>
-
-  <!-- Next up timeline -->
-  <div class="window" id="nextup">
-    <h2>games up next</h2>
-    <div class="timeline-vertical">
-      <div class="timeline-item">
-        <div class="timeline-dot"></div>
-        <div class="timeline-content">
-          <strong>Ace Combat 5</strong>
-          <p>Game looks cool, played a bit as a kid</p>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="window" id="photos">
-    <h2>photos</h2>
-    <p>photos coming soon.</p>
-  </div>
-
-  <div class="window" id="updates">
-    <h2>update log</h2>
-    <div class="timeline-vertical">
-      <div class="timeline-item">
-        <div class="timeline-dot"></div>
-        <div class="timeline-content">
-          <strong>2025-05-23</strong>
-          <p>Site created</p>
-        </div>
-      </div>
-      <div class="timeline-item">
-        <div class="timeline-dot"></div>
-        <div class="timeline-content">
-          <strong>2025-12-15</strong>
-          <p>Added backlog section</p>
-        </div>
-      </div>
-      <div class="timeline-item">
-        <div class="timeline-dot"></div>
-        <div class="timeline-content">
-          <strong>2025-12-15</strong>
-          <p>Added profile picture</p>
-        </div>
-      </div>
-      <div class="timeline-item">
-        <div class="timeline-dot"></div>
-        <div class="timeline-content">
-          <strong>2025-12-15</strong>
-          <p>Added “View More” button for backlog</p>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="window">
-    <h2>system status</h2>
-    <p>connection: <span class="status">stable</span></p>
-    <p>user: tcup</p>
-    <p>signal: ███████░░░</p>
   </div>
 
 </div>
 
 <footer>
-  <p>© tcup • made with pure html • hosted on neocities</p>
+  © tcup • hosted on GitHub Pages
 </footer>
 
 <script>
-window.addEventListener("load", function(){
-  const loader=document.getElementById("loading-screen");
-  setTimeout(()=>{
-    loader.style.transition="opacity 0.8s ease";
-    loader.style.opacity=0;
-    setTimeout(()=>loader.remove(),800);
-  },1000);
+window.addEventListener("load", () => {
+  const loader = document.getElementById("loading-screen");
+  setTimeout(() => loader.remove(), 1000);
 
-  const btn = document.getElementById('view-more-btn');
-  const list = document.getElementById('backlog-list');
-  btn.addEventListener('click', function(){
-    list.classList.toggle('expanded');
-    btn.textContent = list.classList.contains('expanded') ? 'View Less' : 'View More';
+  const btn = document.getElementById("view-more-btn");
+  const list = document.getElementById("backlog-list");
+
+  btn.addEventListener("click", () => {
+    list.classList.toggle("expanded");
+    btn.textContent = list.classList.contains("expanded")
+      ? "View Less"
+      : "View More";
   });
 });
 </script>
