@@ -1,3 +1,3 @@
 welcome to my archive.
 
-https://tcup01.github.io/tcup/
+https://tcup01.github.io/archives/
